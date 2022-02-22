@@ -8,21 +8,24 @@ namespace Model
 {
     public class Track { 
          public String Name { get; set; }
-        private LinkedList<Section> Sections { get; set; }
+        public LinkedList<Section> Sections { get; set; }
 
         public Track(String name, SectionTypes[] sections )
         {
             this.Name = name;
+            this.Sections = ConvertToSection(sections);
            // this.Sections = sections;
         }
 
         private LinkedList<Section> ConvertToSection(SectionTypes[] sectionTypes)
         {
             LinkedList<Section> result = new LinkedList<Section>();
-
-            foreach(SectionTypes sectionType in sectionTypes)
+            if (sectionTypes != null)
             {
-                Sections.AddLast(new Section(sectionType));
+                foreach (SectionTypes sectionType in sectionTypes)
+                {
+                    result.AddLast(new Section(sectionType));
+                }
             }
 
             return result;

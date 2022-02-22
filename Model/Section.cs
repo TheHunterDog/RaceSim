@@ -8,10 +8,10 @@ namespace Model
 {
     public class Section
     {
-        SectionTypes SectionType { get; set; }
+        public SectionTypes SectionType { get; set; }
         public Section(SectionTypes sectionType)
         {
-            this.SectionType = SectionType;
+            this.SectionType = sectionType;
         }
     }
 }
