@@ -37,6 +37,12 @@ namespace Controller
         }
         public static void AddTracks()
         {
+
+            Competition.tracks.Enqueue(new Track("Circuit Assen", new SectionTypes[]
+            {
+                SectionTypes.StartGrid, SectionTypes.StartGrid, SectionTypes.Straight, SectionTypes.RightCorner, SectionTypes.Straight, SectionTypes.RightCorner, SectionTypes.Straight, SectionTypes.Straight, SectionTypes.Straight, SectionTypes.RightCorner, SectionTypes.LeftCorner, SectionTypes.Straight, SectionTypes.RightCorner, SectionTypes.Finish, SectionTypes.RightCorner, SectionTypes.RightCorner, SectionTypes.LeftCorner, SectionTypes.Straight
+            }));
+
             Competition.tracks.Enqueue(new Track("Rotonde", new SectionTypes[]
             {
                 SectionTypes.StartGrid,
