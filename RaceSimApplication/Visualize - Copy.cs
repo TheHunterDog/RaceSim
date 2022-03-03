@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Controller;
 using Model;
 
 namespace RaceSimApplication
@@ -11,8 +12,8 @@ namespace RaceSimApplication
     {
         private static int _posX = Console.WindowWidth / 2;
         private static int _posY = Console.WindowWidth / 2;
-/*        private static Race _currentRace;
-*/        private static Direction _currentDirection = Direction.E;
+       private static Race _currentRace;
+        private static Direction _currentDirection = Direction.E;
         private static Track _track;
 
 
@@ -41,15 +42,17 @@ namespace RaceSimApplication
         #endregion
 
         // Initialize the race
-        public static void Initialize(Track track)
+        public static void Initialize(Race race)
         {
-            _track = track;
+
+            _currentRace = race;
+            _track = race.Track;
 
             // Prepare the console for visualisation
             ConsoleInit();
 
             // Draw the track for the current race
-            DrawTrack(track);
+            DrawTrack(_track);
         }
 
         // Prepare the console and write race info
@@ -97,7 +100,8 @@ namespace RaceSimApplication
         private static void DrawSection(Section section)
         {
             // Fetch the right visual according to it's direction
-            string[] sectionVisual = GetSectionVisual(section.SectionType, _currentDirection);
+            string[] sectionVisual = PlaceParticipantsOnSection(GetSectionVisual(section.SectionType, _currentDirection),_currentRace.GetSectionData(section));
+
 
             // Print each string in the array to form the visual
             int currentY = _posY;
@@ -109,6 +113,28 @@ namespace RaceSimApplication
             }
             UpdateDirection(section.SectionType);
             UpdateCursor();
+        }
+
+
+        private static String[] PlaceParticipantsOnSection(String[] SectionVisual, SectionData sectionData)
+        {
+            String[] vs = new String[SectionVisual.Length];
+            String left = " ";
+            String right = " ";
+            if (sectionData.Left != null)
+            {
+                left = sectionData.Left.Name.Substring(0, 1);
+            }
+            if(sectionData.Right != null)
+            {
+                right = sectionData.Right.Name.Substring(0, 1);
+
+            }
+            for(int i = 0; i < SectionVisual.Length; i++)
+            {
+                vs[i] = SectionVisual[i].Replace("1", left).Replace("2", right);
+            }
+            return vs;
         }
 
         // Visualize the participants on the track section

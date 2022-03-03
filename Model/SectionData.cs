@@ -8,13 +8,26 @@ namespace Model
 {
     public class SectionData
     {
-        private IParticipant Left { get; set; }
-        private IParticipant Right { get; set; }
+        public IParticipant Left { get; set; }
+        public IParticipant Right { get; set; }
         private int DistanceLeftt { get; set; }
         private int DistacneRight { get; set; }
         public SectionData()
         {
-            throw new NotImplementedException();
+        }
+        public bool addParicpantTpSection(IParticipant p )
+        {
+            if(Right == null)
+            {
+                Right = p;
+                return true;
+            }
+            else if(Left == null)
+            {
+                Left = p;
+                return true;
+            }
+            return false;
         }
     }
 }
