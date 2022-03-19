@@ -53,6 +53,7 @@ namespace RaceSimApplication
 
             // Draw the track for the current race
             DrawTrack(_track);
+            _currentRace.DriversChanged += OnDriversChanged;
         }
 
         // Prepare the console and write race info
@@ -63,11 +64,11 @@ namespace RaceSimApplication
         }
 
         // Event handler when drivers change position
-/*        public static void OnDriversChanged(object sender, DriversChangedEventArgs e)
+        public static void OnDriversChanged(object sender, DriversChangedEventArgs e)
         {
-            DrawTrack(e.Track);
+            DrawTrack(e.track);
         }
-*/
+
 /*        public static void OnNextRaceEvent(object sender, NextRaceEventArgs e)
         {
             // Reinitialize the race
@@ -107,7 +108,13 @@ namespace RaceSimApplication
             int currentY = _posY;
             foreach (string s in sectionVisual)
             {
-                Console.SetCursorPosition(_posX, currentY);
+                try
+                {
+                    Console.SetCursorPosition(_posX, currentY);
+                }
+                catch(System.ArgumentOutOfRangeException) {
+                
+                }
                 Console.WriteLine(s);
                 currentY++;
             }

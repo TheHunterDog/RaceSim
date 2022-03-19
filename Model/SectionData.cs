@@ -10,8 +10,8 @@ namespace Model
     {
         public IParticipant Left { get; set; }
         public IParticipant Right { get; set; }
-        private int DistanceLeftt { get; set; }
-        private int DistacneRight { get; set; }
+        public int DistanceLeft { get; set; }
+        public int DistacneRight { get; set; }
         public SectionData()
         {
         }

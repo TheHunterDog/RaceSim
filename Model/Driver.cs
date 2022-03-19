@@ -15,7 +15,7 @@ namespace Model
             this.equipment = equipment;
             TeamColors = teamColors;
         }
-
+        private int _wins = 0;
         public string Name { get ; set ; }
         public int Points { get ; set ; }
         public IEquipment equipment { get ; set ; }
