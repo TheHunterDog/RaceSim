@@ -4,6 +4,7 @@ using RaceSimApplication;
 Console.WriteLine("Hello, World!");
 Model.Competition competition = new Model.Competition();
 Controller.Data.Initialize(competition);
+Controller.Data.NextRaceEvent += VisualizeR.OnNextRaceEvent;
 Controller.Data.NextRace();
 Console.WriteLine(Controller.Data.CurrentRace.Track.Name);
 VisualizeR.Initialize(Controller.Data.CurrentRace);

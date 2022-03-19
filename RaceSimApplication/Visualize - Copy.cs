@@ -69,17 +69,18 @@ namespace RaceSimApplication
             DrawTrack(e.track);
         }
 
-/*        public static void OnNextRaceEvent(object sender, NextRaceEventArgs e)
+        
+        public static void OnNextRaceEvent(object sender, NextRaceEventArgs e)
         {
             // Reinitialize the race
-            Initialize(e.Race);
+            Initialize(e.race);
 
             // Link events
             _currentRace.DriversChanged += OnDriversChanged;
 
             // Draw the track
             DrawTrack(_currentRace.Track);
-        }*/
+        }
 
         // Draw the track by drawing every section
         private static void DrawTrack(Track track)
