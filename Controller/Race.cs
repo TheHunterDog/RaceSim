@@ -31,7 +31,30 @@ namespace Controller
             DriversChanged?.Invoke(this, new DriversChangedEventArgs() { track = this.Track });
         }
         public event EventHandler<DriversChangedEventArgs> DriversChanged;
+        public void setRandomBroken(Object source, ElapsedEventArgs e)
+        {
+            Random r = new Random();
+            
+            int i = r.Next(0,Participants.Count);
+            if(Participants[i] != null)
+            {
+                if (!Participants[i].equipment.isBroken)
+                {
+                    Participants[i].equipment
+                        .isBroken = true;
+                }
+                else
+                {
+                    Participants[i].equipment.isBroken = false;
+                    Participants[i].equipment.Performance -= r.Next(2, 5);
+                    Participants[i].equipment.Quality -= r.Next(2, 8);
+                    
+                }
+            }
 
+
+            
+        }
         #endregion
         public void Start()
         {
@@ -107,8 +130,17 @@ namespace Controller
                 
                 if(pair.Value.Left != null)
                 {
-                    int speed = pair.Value.Left.equipment.Speed * pair.Value.Left.equipment.Performance;
-                    pair.Value.DistanceLeft += speed;
+                    int speed = 0;
+                    if (pair.Value.Left.equipment.isBroken)
+                    {
+                        speed = 0;
+                    }
+                    else
+                    {
+                        speed = pair.Value.Left.equipment.Speed * pair.Value.Left.equipment.Performance;
+
+                        pair.Value.DistanceLeft += speed;
+                    }
                     if (pair.Value.DistanceLeft >= gridsize && (pair2.Value.Right == null || pair2.Value.Left == null))
                     {
                         if (pair2.Value.Right == null)
@@ -146,7 +178,15 @@ namespace Controller
                 }
                 if (pair.Value.Right != null)
                 {
-                    int speed = pair.Value.Right.equipment.Speed * pair.Value.Right.equipment.Performance;
+                    int speed;
+                    if (pair.Value.Right.equipment.isBroken)
+                    {
+                        speed = 0;
+                    }
+                    else
+                    {
+                        speed = pair.Value.Right.equipment.Speed * pair.Value.Right.equipment.Performance;
+                    }
                     if (pair.Value.DistacneRight >= gridsize && (pair2.Value.Right == null || pair2.Value.Left == null))
                     {
                         if (pair2.Value.Right == null)
@@ -181,6 +221,8 @@ namespace Controller
                 }
             }
         }
+
+
         public Race(Track track, List<IParticipant> participants)
         {
             Track = track;
@@ -191,6 +233,7 @@ namespace Controller
             placeParticipants();
             timer = new System.Timers.Timer(500);
             timer.Elapsed += OnTimedEvent;
+            timer.Elapsed += setRandomBroken;
             Start();
         }
         void placeParticipants()

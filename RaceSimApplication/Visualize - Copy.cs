@@ -131,7 +131,7 @@ namespace RaceSimApplication
             String right = " ";
             if (sectionData.Left != null)
             {
-                left = sectionData.Left.Name.Substring(0, 1);
+                left = sectionData.Left.equipment.isBroken ? "💔" : sectionData.Left.Name.Substring(0, 1);
             }
             if(sectionData.Right != null)
             {
