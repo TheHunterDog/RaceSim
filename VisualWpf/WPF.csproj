@@ -1,0 +1,88 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="assets\drivers\driver_blue_horizontal_left.png" />
+    <None Remove="assets\drivers\driver_blue_horizontal_right.png" />
+    <None Remove="assets\drivers\driver_blue_vertical_down.png" />
+    <None Remove="assets\drivers\driver_blue_vertical_top.png" />
+    <None Remove="assets\drivers\driver_green_horizontal_left.png" />
+    <None Remove="assets\drivers\driver_green_horizontal_right.png" />
+    <None Remove="assets\drivers\driver_green_vertical_down.png" />
+    <None Remove="assets\drivers\driver_green_vertical_top.png" />
+    <None Remove="assets\drivers\driver_grey_horizontal_left.png" />
+    <None Remove="assets\drivers\driver_grey_horizontal_right.png" />
+    <None Remove="assets\drivers\driver_grey_vertical_down.png" />
+    <None Remove="assets\drivers\driver_grey_vertical_top.png" />
+    <None Remove="assets\drivers\driver_red_horizontal_left.png" />
+    <None Remove="assets\drivers\driver_red_horizontal_right.png" />
+    <None Remove="assets\drivers\driver_red_vertical_down.png" />
+    <None Remove="assets\drivers\driver_red_vertical_top.png" />
+    <None Remove="assets\drivers\driver_yellow_horizontal_left.png" />
+    <None Remove="assets\drivers\driver_yellow_horizontal_right.png" />
+    <None Remove="assets\drivers\driver_yellow_vertical_down.png" />
+    <None Remove="assets\drivers\driver_yellow_vertical_top.png" />
+    <None Remove="assets\sections\track_section_corner_bottomleft.png" />
+    <None Remove="assets\sections\track_section_corner_bottomright.png" />
+    <None Remove="assets\sections\track_section_corner_topleft.png" />
+    <None Remove="assets\sections\track_section_corner_topright.png" />
+    <None Remove="assets\sections\track_section_finish_horizontal.png" />
+    <None Remove="assets\sections\track_section_finish_vertical.png" />
+    <None Remove="assets\sections\track_section_startgrid.png" />
+    <None Remove="assets\sections\track_section_straight_horizontal.png" />
+    <None Remove="assets\sections\track_section_straight_vertical.png" />
+    <None Remove="grapefruit-slice-332-332.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="assets\drivers\driver_blue_horizontal_left.png" />
+    <Content Include="assets\drivers\driver_blue_horizontal_right.png" />
+    <Content Include="assets\drivers\driver_blue_vertical_down.png" />
+    <Content Include="assets\drivers\driver_blue_vertical_top.png" />
+    <Content Include="assets\drivers\driver_green_horizontal_left.png" />
+    <Content Include="assets\drivers\driver_green_horizontal_right.png" />
+    <Content Include="assets\drivers\driver_green_vertical_down.png" />
+    <Content Include="assets\drivers\driver_green_vertical_top.png" />
+    <Content Include="assets\drivers\driver_grey_horizontal_left.png" />
+    <Content Include="assets\drivers\driver_grey_horizontal_right.png" />
+    <Content Include="assets\drivers\driver_grey_vertical_down.png" />
+    <Content Include="assets\drivers\driver_grey_vertical_top.png" />
+    <Content Include="assets\drivers\driver_red_horizontal_left.png" />
+    <Content Include="assets\drivers\driver_red_horizontal_right.png" />
+    <Content Include="assets\drivers\driver_red_vertical_down.png" />
+    <Content Include="assets\drivers\driver_red_vertical_top.png" />
+    <Content Include="assets\drivers\driver_yellow_horizontal_left.png" />
+    <Content Include="assets\drivers\driver_yellow_horizontal_right.png" />
+    <Content Include="assets\drivers\driver_yellow_vertical_down.png" />
+    <Content Include="assets\drivers\driver_yellow_vertical_top.png" />
+    <Content Include="assets\sections\track_section_corner_bottomleft.png" />
+    <Content Include="assets\sections\track_section_corner_bottomright.png" />
+    <Content Include="assets\sections\track_section_corner_topleft.png" />
+    <Content Include="assets\sections\track_section_corner_topright.png" />
+    <Content Include="assets\sections\track_section_finish_horizontal.png" />
+    <Content Include="assets\sections\track_section_finish_vertical.png" />
+    <Content Include="assets\sections\track_section_startgrid.png" />
+    <Content Include="assets\sections\track_section_straight_horizontal.png" />
+    <Content Include="assets\sections\track_section_straight_vertical.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Drawing.Common" Version="6.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Controller\Controller.csproj" />
+    <ProjectReference Include="..\Model\Model.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="grapefruit-slice-332-332.jpg" />
+  </ItemGroup>
+
+</Project>

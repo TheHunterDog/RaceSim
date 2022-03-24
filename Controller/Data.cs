@@ -14,9 +14,9 @@ namespace Controller
 
         public static event EventHandler<NextRaceEventArgs> NextRaceEvent;
 
-        public static void Initialize(Competition comp)
+        public static void Initialize()
         {
-            Competition = comp;
+            Competition = new Competition();
             AddParticipants();
             AddTracks();
 

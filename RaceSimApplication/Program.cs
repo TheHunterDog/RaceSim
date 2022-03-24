@@ -1,6 +1,8 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using RaceSimApplication;
 
+Console.OutputEncoding = System.Text.Encoding.UTF8;
+
 Console.WriteLine("Hello, World!");
 Model.Competition competition = new Model.Competition();
 Controller.Data.Initialize(competition);

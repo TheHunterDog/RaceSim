@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.32126.317
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RaceSimApplication", "RaceSimApplication\RaceSimApplication.csproj", "{DFAD548E-57CE-4A53-BC91-9B5D89EF3027}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RaceSimApplication", "RaceSimApplication\RaceSimApplication.csproj", "{DFAD548E-57CE-4A53-BC91-9B5D89EF3027}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Model", "Model\Model.csproj", "{DB0FC12F-C37F-4FE6-AA13-F48CCB512220}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Model", "Model\Model.csproj", "{DB0FC12F-C37F-4FE6-AA13-F48CCB512220}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Controller", "Controller\Controller.csproj", "{342E4741-505F-48E3-A0ED-5987ACC0D144}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Controller", "Controller\Controller.csproj", "{342E4741-505F-48E3-A0ED-5987ACC0D144}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ControllerTest", "ControllerTest\ControllerTest.csproj", "{631BA611-442F-429E-ABCF-1DA267C2DA7C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ControllerTest", "ControllerTest\ControllerTest.csproj", "{631BA611-442F-429E-ABCF-1DA267C2DA7C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPF", "VisualWpf\WPF.csproj", "{DE7F96B5-2387-46BE-9FAA-FDF2E38B4FA7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{631BA611-442F-429E-ABCF-1DA267C2DA7C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{631BA611-442F-429E-ABCF-1DA267C2DA7C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{631BA611-442F-429E-ABCF-1DA267C2DA7C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DE7F96B5-2387-46BE-9FAA-FDF2E38B4FA7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DE7F96B5-2387-46BE-9FAA-FDF2E38B4FA7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DE7F96B5-2387-46BE-9FAA-FDF2E38B4FA7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DE7F96B5-2387-46BE-9FAA-FDF2E38B4FA7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
