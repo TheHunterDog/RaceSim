@@ -14,9 +14,9 @@ namespace Controller
 
         public static event EventHandler<NextRaceEventArgs> NextRaceEvent;
 
-        public static void Initialize()
+        public static void Initialize(Competition c)
         {
-            Competition = new Competition();
+            Competition = c;
             AddParticipants();
             AddTracks();
 
@@ -41,14 +41,14 @@ namespace Controller
         }
         public static void AddParticipants()
         {
-            Competition.participants.Add(new Driver("Mark", 33, new Car(20, 20, 20, false), TeamColors.Blue));
-            Competition.participants.Add(new Driver("Gert", 55, new Car(30, 20, 10, false), TeamColors.Red));
-            Competition.participants.Add(new Driver("Gerwin", 1, new Car(20, 20, 20, false), TeamColors.Green));
-            Competition.participants.Add(new Driver("Rick", 44, new Car(20, 20, 20, false), TeamColors.Yellow));
-            Competition.participants.Add(new Driver("Gerwin", 1, new Car(20, 20, 20, false), TeamColors.Green));
-            Competition.participants.Add(new Driver("Rick", 44, new Car(20, 20, 20, false), TeamColors.Yellow));
+            //Competition.participants.Add(new Driver("Mark", 33, new Car(100, 60, 40, false), TeamColors.Blue));
+            //Competition.participants.Add(new Driver("Gert", 55, new Car(100, 60, 40, false), TeamColors.Red));
+            //Competition.participants.Add(new Driver("Gerwin", 1, new Car(100, 60, 60, false), TeamColors.Green));
+            //Competition.participants.Add(new Driver("Rick", 44, new Car(100, 60, 120, false), TeamColors.Yellow));
+            //Competition.participants.Add(new Driver("Gerwin", 1, new Car(100, 100, 100, false), TeamColors.Green));
+            Competition.participants.Add(new Driver("Rick", 44, new Car(100, 100, 100, false), TeamColors.Yellow));
 
-            Competition.participants.Add(new Driver("DR.ROBOT", 100, new Car(20, 20, 20, false), TeamColors.Grey));
+            //Competition.participants.Add(new Driver("DR.ROBOT", 100, new Car(20, 20, 20, false), TeamColors.Grey));
         }
         public static void AddTracks()
         {

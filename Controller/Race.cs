@@ -25,19 +25,27 @@ namespace Controller
         public void OnTimedEvent(Object source, ElapsedEventArgs e)
         {
             MoveParticipants();
+            DriversChanged?.Invoke(this, new DriversChangedEventArgs() { track = this.Track });
+
             if (checkWin()) { 
                 End?.Invoke(this, e); 
             }
-            DriversChanged?.Invoke(this, new DriversChangedEventArgs() { track = this.Track });
         }
         public event EventHandler<DriversChangedEventArgs> DriversChanged;
         public void setRandomBroken(Object source, ElapsedEventArgs e)
         {
+
+            foreach (var participant in Participants)
+            {
+                participant.equipment.isBroken = false;
+            }
+
             Random r = new Random();
             
-            int i = r.Next(0,Participants.Count);
-            if(Participants[i] != null)
+            int i = r.Next(1,Participants.Count * 100);
+            if(Participants.Count >= i && i >= 1 && Participants[i - 1] != null)
             {
+                i -= 1;
                 if (!Participants[i].equipment.isBroken)
                 {
                     Participants[i].equipment
@@ -46,8 +54,8 @@ namespace Controller
                 else
                 {
                     Participants[i].equipment.isBroken = false;
-                    Participants[i].equipment.Performance -= r.Next(2, 5);
-                    Participants[i].equipment.Quality -= r.Next(2, 8);
+                    Participants[i].equipment.Performance -= r.Next(0, 3);
+                    Participants[i].equipment.Quality -= r.Next(0, 4);
                     
                 }
             }
@@ -79,6 +87,7 @@ namespace Controller
             }
             if(_wins.Count != 0)
             {
+                _wins.Clear();
                 return true;
             }
             return false;
@@ -151,8 +160,10 @@ namespace Controller
                                 if (ParticipantWin(pair2.Value.Right))
                                 {
                                     pair2.Value.Right = null;
+
                                 }
                             }
+                            
                             
                         }
                         else if (pair2.Value.Left == null)
@@ -166,6 +177,7 @@ namespace Controller
                             }
                             
                         }
+                       
                         pair.Value.Left = null;
                         pair.Value.DistanceLeft = 0;
                         
@@ -273,5 +285,10 @@ namespace Controller
             }
             return SectionData;
         }
+    }
+    public enum Side
+    {
+        Left,
+        Right,
     }
 }

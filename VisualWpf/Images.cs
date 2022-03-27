@@ -23,17 +23,24 @@ namespace WPF
             }
             else
             {
-                cache[ImageURI] = new System.Drawing.Bitmap(ImageURI);
-                return (System.Drawing.Bitmap)cache[ImageURI].Clone();
+                cache[ImageURI] = new Bitmap(ImageURI);
+                return (Bitmap)cache[ImageURI];
             }
         }
         public static void Clear()
         {
-            cache.Clear();
+            if(cache != null)
+            {
+                cache.Clear();
+            }
         }
         public static System.Drawing.Bitmap GetEmptyBitmap(int width, int height)
         {
             const String Empty = "EMPTY";
+            if(cache == null)
+            {
+                cache = new Dictionary<String, System.Drawing.Bitmap>();
+            }
             if (!cache.ContainsKey(Empty))
             {
                 cache.Add(Empty, new System.Drawing.Bitmap(width,height));

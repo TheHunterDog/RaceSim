@@ -1,23 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Drawing;
+using System.Text;
 using System.Windows.Media.Imaging;
-using WPF;
 using Model;
-using RaceSimApplication;
+using Controller;
+using System.Diagnostics;
 
 namespace WPF
 {
-    public static class Visualize
+    public static class VisualizeWPF
     {
-        public static VisualizeR.Direction CurDir = VisualizeR.Direction.E;
-        private static int posX = 350;
-        private static int posY = 200;
+        private static int _posX = 350;
+        private static int _posY = 200;
+        public static Direction _currentDirection = Direction.E;
 
-        private static Controller.Race _Race;
+        private static Race _currentRace;
+
         #region graphics
 
         // Track pieces
@@ -61,88 +60,101 @@ namespace WPF
         private const string _driverYellowDown = @".\assets\drivers\driver_yellow_vertical_down.png";
         private const string _driverYellowRight = @".\assets\drivers\driver_yellow_horizontal_right.png";
         private const string _driverYellowLeft = @".\assets\drivers\driver_yellow_horizontal_left.png";
-
+        // Broken
+        private const string _broken = @".\assets\Attributes\BrokenFire.png";
         #endregion
 
-        public static void Init(Controller.Race r)
+        public static void Initialize(Race race)
         {
-            _Race = r;
+            _currentRace = race;
         }
-        public static BitmapSource DrawTrack(Track t)
+
+        // Draw the track by drawing every section
+        public static BitmapSource DrawTrack(Track track)
         {
-            Bitmap b = Images.GetEmptyBitmap(800, 800);
-            Graphics g = Graphics.FromImage(b);
+            // Create track canvas
+            Bitmap Canvas = Images.GetEmptyBitmap(800, 800);
+            Graphics g = Graphics.FromImage(Canvas);
 
-            foreach(Section s in t.Sections)
+            // Draw every section and the participants
+            foreach (Section section in track.Sections)
             {
-                Bitmap section = Images.LoadImage(getSectionURL(s.SectionType,CurDir));
-                g.DrawImage(section,posX,posY, 100, 100);
-                changeDirection(s.SectionType);
+                Bitmap sectionBitmap = Images.LoadImage(GetSectionVisual(section.SectionType, _currentDirection));
+                g.DrawImage(sectionBitmap, _posX, _posY, 100, 100);
 
+                VisualizeParticipants(section, g);
+
+                UpdateDirection(section.SectionType);
                 UpdateCursor();
             }
-            return Images.CreateBitmapSourceFromGdiBitmap(Images.GetEmptyBitmap(Images.DEFAULT_WIDTH,Images.DEFAULT_HEIGHT));
+
+            return Images.CreateBitmapSourceFromGdiBitmap(Canvas);
         }
 
         // Visualize the participants on the track
         public static void VisualizeParticipants(Section section, Graphics g)
         {
             // Fetch the participants
-            IParticipant leftParticipant = _Race.GetSectionData(section).Left;
-            IParticipant rightParticipant = _Race.GetSectionData(section).Right;
+            IParticipant leftParticipant = _currentRace.GetSectionData(section).Left;
+            IParticipant rightParticipant = _currentRace.GetSectionData(section).Right;
 
             if (leftParticipant != null)
             {
-                DrawParticipant(leftParticipant, g, section, Controller.Side.Left);
+                DrawParticipant(leftParticipant, g, section, Side.Left);
             }
 
             if (rightParticipant != null)
             {
-                DrawParticipant(rightParticipant, g, section, Controller.Side.Right);
+                DrawParticipant(rightParticipant, g, section, Side.Right);
             }
         }
 
         // Draw the participant on track piece
-        public static void DrawParticipant(IParticipant participant, Graphics g, Section section, Controller.Side side)
+        public static void DrawParticipant(IParticipant participant, Graphics g, Section section, Side side)
         {
             (int x, int y) = CalculateParticipantPos(section.SectionType, side);
             Bitmap participantBitmap = Images.LoadImage(FetchParticipantBitmapUrl(participant));
-            g.DrawImage(participantBitmap, posX + x, posY + y);
+            g.DrawImage(participantBitmap, _posX+x, _posY+y);
+            if (participant.equipment.isBroken)
+            {
+                Bitmap broken = Images.LoadImage(_broken);
+                g.DrawImage(broken, (_posX), _posY);
+            }
         }
 
         // Calculate the position for the drivers
-        public static (int x, int y) CalculateParticipantPos(SectionTypes sectionType, Controller.Side side)
+        public static (int x, int y) CalculateParticipantPos(SectionTypes sectionType, Side side)
         {
-            return CurDir switch
+            return _currentDirection switch
             {
-                VisualizeR.Direction.N => side switch
+                Direction.N => side switch
                 {
-                    Controller.Side.Left => (20, 20),
-                    Controller.Side.Right => (50, 20)
+                    Side.Left => (20, 20),
+                    Side.Right => (50, 20)
                 },
-                VisualizeR.Direction.E => side switch
+                Direction.E => side switch
                 {
-                    Controller.Side.Left => (20, 20),
-                    Controller.Side.Right => (20, 50)
+                    Side.Left => (20, 20),
+                    Side.Right => (20, 50)
                 },
-                VisualizeR.Direction.S => side switch
+                Direction.S => side switch
                 {
-                    Controller.Side.Left => (50, 20),
-                    Controller.Side.Right => (20, 20)
+                    Side.Left => (50, 20),
+                    Side.Right => (20, 20)
                 },
-                VisualizeR.Direction.W => side switch
+                Direction.W => side switch
                 {
-                    Controller.Side.Left => (20, 50),
-                    Controller.Side.Right => (20, 20)
+                    Side.Left => (20, 50),
+                    Side.Right => (20, 20)
                 }
             };
         }
 
         public static string FetchParticipantBitmapUrl(IParticipant participant)
         {
-            return CurDir switch
+            return _currentDirection switch
             {
-                VisualizeR.Direction.N => participant.TeamColors switch
+                Direction.N => participant.TeamColors switch
                 {
                     TeamColors.Blue => _driverBlueUp,
                     TeamColors.Green => _driverGreenUp,
@@ -150,7 +162,7 @@ namespace WPF
                     TeamColors.Red => _driverRedUp,
                     TeamColors.Yellow => _driverYellowUp
                 },
-                VisualizeR.Direction.E => participant.TeamColors switch
+                Direction.E => participant.TeamColors switch
                 {
                     TeamColors.Blue => _driverBlueRight,
                     TeamColors.Green => _driverGreenRight,
@@ -158,7 +170,7 @@ namespace WPF
                     TeamColors.Red => _driverRedRight,
                     TeamColors.Yellow => _driverYellowRight
                 },
-                VisualizeR.Direction.S => participant.TeamColors switch
+                Direction.S => participant.TeamColors switch
                 {
                     TeamColors.Blue => _driverBlueDown,
                     TeamColors.Green => _driverGreenDown,
@@ -166,7 +178,7 @@ namespace WPF
                     TeamColors.Red => _driverRedDown,
                     TeamColors.Yellow => _driverYellowDown
                 },
-                VisualizeR.Direction.W => participant.TeamColors switch
+                Direction.W => participant.TeamColors switch
                 {
                     TeamColors.Blue => _driverBlueLeft,
                     TeamColors.Green => _driverGreenLeft,
@@ -177,110 +189,119 @@ namespace WPF
             };
         }
 
-
-
-
-        private static void UpdateCursor()
+        private static string GetSectionVisual(SectionTypes sectionType, Direction direction)
         {
-            int size = 100;
-
-            switch (CurDir)
-            {
-                case VisualizeR.Direction.N:
-                    posY -= size;
-                    break;
-
-                case VisualizeR.Direction.E:
-                    posX += size;
-                    break;
-
-                case VisualizeR.Direction.S:
-                    posY += size;
-                    break;
-
-                case VisualizeR.Direction.W:
-                    posX -= size;
-                    break;
-            }
-        }
-        public static void changeDirection(SectionTypes type)
-        {
-            if (type == SectionTypes.RightCorner)
-            {
-                switch (CurDir)
-                {
-                    case VisualizeR.Direction.N:
-                        CurDir = VisualizeR.Direction.E;
-                        break;
-                    case VisualizeR.Direction.E:
-                        CurDir = VisualizeR.Direction.S;
-                        break;
-                    case VisualizeR.Direction.S:
-                        CurDir = VisualizeR.Direction.W;
-                        break;
-                    case VisualizeR.Direction.W:
-                        CurDir = VisualizeR.Direction.N;
-                        break;
-                }
-            }
-            else if (type == SectionTypes.LeftCorner)
-            {
-                switch (CurDir)
-                {
-                    case VisualizeR.Direction.N:
-                        CurDir = VisualizeR.Direction.W;
-                        break;
-                    case VisualizeR.Direction.E:
-                        CurDir = VisualizeR.Direction.N;
-                        break;
-                    case VisualizeR.Direction.S:
-                        CurDir = VisualizeR.Direction.E;
-                        break;
-                    case VisualizeR.Direction.W:
-                        CurDir = VisualizeR.Direction.S;
-                        break;
-                }
-            }
-        }
-        private static String getSectionURL(SectionTypes ST, RaceSimApplication.VisualizeR.Direction dir)
-        {
-            return ST switch
+            return sectionType switch
             {
                 SectionTypes.StartGrid => _startGrid,
-                SectionTypes.Finish => dir switch
+                SectionTypes.Finish => direction switch
                 {
-                    VisualizeR.Direction.N => _finishNorth,
-                    VisualizeR.Direction.E => _finishEast,
-                    VisualizeR.Direction.S => _finishSouth,
-                    VisualizeR.Direction.W => _finishWest,
+                    Direction.N => _finishNorth,
+                    Direction.E => _finishEast,
+                    Direction.S => _finishSouth,
+                    Direction.W => _finishWest,
                     _ => throw new NotImplementedException()
                 },
-                SectionTypes.Straight => dir switch
+                SectionTypes.Straight => direction switch
                 {
-                    VisualizeR.Direction.N => _straightVertical,
-                    VisualizeR.Direction.E => _straightHorizontal,
-                    VisualizeR.Direction.S => _straightVertical,
-                    VisualizeR.Direction.W => _straightHorizontal,
+                    Direction.N => _straightVertical,
+                    Direction.E => _straightHorizontal,
+                    Direction.S => _straightVertical,
+                    Direction.W => _straightHorizontal,
                     _ => throw new NotImplementedException()
                 },
-                SectionTypes.RightCorner => dir switch
+                SectionTypes.RightCorner => direction switch
                 {
-                    VisualizeR.Direction.N => _cornerLeftTop,
-                    VisualizeR.Direction.E => _cornerRightTop,
-                    VisualizeR.Direction.S => _cornerRightBottom,
-                    VisualizeR.Direction.W => _cornerLeftBottom,
+                    Direction.N => _cornerLeftTop,
+                    Direction.E => _cornerRightTop,
+                    Direction.S => _cornerRightBottom,
+                    Direction.W => _cornerLeftBottom,
                     _ => throw new NotImplementedException()
                 },
-                SectionTypes.LeftCorner => dir switch
+                SectionTypes.LeftCorner => direction switch
                 {
-                    VisualizeR.Direction.N => _cornerRightTop,
-                    VisualizeR.Direction.E => _cornerRightBottom,
-                    VisualizeR.Direction.S => _cornerLeftBottom,
-                    VisualizeR.Direction.W => _cornerLeftTop,
+                    Direction.N => _cornerRightTop,
+                    Direction.E => _cornerRightBottom,
+                    Direction.S => _cornerLeftBottom,
+                    Direction.W => _cornerLeftTop,
                     _ => throw new NotImplementedException()
                 },
                 _ => throw new NotImplementedException()
             };
         }
+
+        // Update the direction if corner is printed
+        private static void UpdateDirection(SectionTypes type)
+        {
+            if (type == SectionTypes.RightCorner)
+            {
+                switch (_currentDirection)
+                {
+                    case Direction.N:
+                        _currentDirection = Direction.E;
+                        break;
+                    case Direction.E:
+                        _currentDirection = Direction.S;
+                        break;
+                    case Direction.S:
+                        _currentDirection = Direction.W;
+                        break;
+                    case Direction.W:
+                        _currentDirection = Direction.N;
+                        break;
+                }
+            }
+            else if (type == SectionTypes.LeftCorner)
+            {
+                switch (_currentDirection)
+                {
+                    case Direction.N:
+                        _currentDirection = Direction.W;
+                        break;
+                    case Direction.E:
+                        _currentDirection = Direction.N;
+                        break;
+                    case Direction.S:
+                        _currentDirection = Direction.E;
+                        break;
+                    case Direction.W:
+                        _currentDirection = Direction.S;
+                        break;
+                }
+            }
+        }
+
+        private static void UpdateCursor()
+        {
+            int size = 100;
+
+            switch (_currentDirection)
+            {
+                case Direction.N:
+                    _posY -= size;
+                    break;
+
+                case Direction.E:
+                    _posX += size;
+                    break;
+
+                case Direction.S:
+                    _posY += size;
+                    break;
+
+                case Direction.W:
+                    _posX -= size;
+                    break;
+            }
+        }
+    }
+
+    // Define the track directions
+    public enum Direction
+    {
+        N,
+        E,
+        S,
+        W
     }
 }

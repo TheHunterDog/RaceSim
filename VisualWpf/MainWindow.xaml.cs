@@ -30,7 +30,7 @@ namespace WPF
         {
             InitializeComponent();
             //ImageHandler.Initialize();
-            Data.Initialize();
+            Data.Initialize(new Competition());
             Data.NextRaceEvent += OnNextRaceEvent;
             Data.NextRace();
         }
@@ -41,11 +41,17 @@ namespace WPF
             new Action(() =>
             {
                 this.TrackImage.Source = null;
-                this.TrackImage.Source = Visualize.DrawTrack(e.track);
+                this.TrackImage.Source = WPF.VisualizeWPF.DrawTrack(e.track);
             }));
         }
         public void OnNextRaceEvent(object sender, NextRaceEventArgs e)
         {
+            Images.Clear();
+            //WPF.Visualize.Init(e.race);
+            WPF.VisualizeWPF.Initialize(e.race);
+
+            e.race.DriversChanged += OnDriversChanged;
+
         }
     }
 }
