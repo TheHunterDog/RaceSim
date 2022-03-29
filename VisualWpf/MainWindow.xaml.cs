@@ -49,9 +49,37 @@ namespace WPF
             Images.Clear();
             //WPF.Visualize.Init(e.race);
             WPF.VisualizeWPF.Initialize(e.race);
+            DataContext d = new DataContext();
 
             e.race.DriversChanged += OnDriversChanged;
+            e.race.DriversChanged += d.OnDriverChanged;
 
+        }
+
+        private void MenuItem_Exit_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+            Application.Current.Shutdown();
+        }
+        private Batman batmanWindow = null;
+        private Windesheim windesheimWindow = null;
+        private void Open_WINdow(object sender, RoutedEventArgs e)
+        {
+            if(windesheimWindow == null)
+            {
+                windesheimWindow = new WPF.Windesheim();
+
+            }
+            windesheimWindow.Show();
+        }
+
+        private void open_OtherWindow(object sender, RoutedEventArgs e)
+        {
+            if (batmanWindow == null)
+            {
+                batmanWindow = new WPF.Batman();
+            }
+            batmanWindow.Show();
         }
     }
 }
