@@ -7,6 +7,10 @@
         mc:Ignorable="d"
         Title="Windesheim" Height="450" Width="800">
     <Grid>
-        
+        <Label Content="{Binding Windesheim}">
+            <Label.DataContext>
+                <local:DataContext/>
+            </Label.DataContext>
+        </Label>
     </Grid>
 </Window>

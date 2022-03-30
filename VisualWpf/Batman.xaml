@@ -7,6 +7,14 @@
         mc:Ignorable="d"
         Title="Batman" Height="450" Width="800">
     <Grid>
-        
+        <DockPanel>
+            <Label Content="{Binding TrackName, BindsDirectlyToSource=False, IsAsync=False, NotifyOnSourceUpdated=False, NotifyOnTargetUpdated=False, NotifyOnValidationError=False, ValidatesOnDataErrors=False, ValidatesOnExceptions=False, ValidatesOnNotifyDataErrors=True}"/>
+
+            <Label Content="{Binding CurrentTime, Mode=OneWay}">
+            <Label.DataContext>
+                <local:DataContext/>
+            </Label.DataContext>
+        </Label>
+        </DockPanel>
     </Grid>
 </Window>

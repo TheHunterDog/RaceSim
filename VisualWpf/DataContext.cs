@@ -16,11 +16,27 @@ namespace WPF
         {
             return Data.CurrentRace.Track.Name;
         };
+        public String Windesheim { get; set; }
+        public DateTime CurrentTime { get; set; }
         public String TrackName { get; set; }
         public void OnDriverChanged(object sender, DriversChangedEventArgs e)
         {
             TrackName = e.track.Name;
+            changeText();
+            CurrentTime = DateTime.Now;
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(""));
         }
+        public void changeText()
+        {
+            if(Windesheim == "Windesheim")
+            {
+                Windesheim = "Hello world";
+            }
+            else
+            {
+                Windesheim = "Windesheim";
+            }
+    }   
     }
 }
+
