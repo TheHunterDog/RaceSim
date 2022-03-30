@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Controller;
+using Microsoft.VisualBasic.CompilerServices;
 using Model;
 
 namespace WPF
@@ -16,8 +17,16 @@ namespace WPF
         {
             return Data.CurrentRace.Track.Name;
         };
-        public String Windesheim { get; set; }
-        public DateTime CurrentTime { get; set; }
+        private String _windesheim = "aap";
+        public String Windesheim {
+            get => _windesheim;
+            set 
+            { 
+                _windesheim = value;
+                OnPropertyChanged(nameof(Windesheim) );
+            } 
+        }
+        public DateTime CurrentTime { get; private set; }
         public String TrackName { get; set; }
         public void OnDriverChanged(object sender, DriversChangedEventArgs e)
         {
@@ -25,6 +34,10 @@ namespace WPF
             changeText();
             CurrentTime = DateTime.Now;
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(""));
+        }
+        private void OnPropertyChanged(string s)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(s));
         }
         public void changeText()
         {

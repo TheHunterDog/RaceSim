@@ -12,7 +12,7 @@ namespace Controller
     {
         private System.Timers.Timer timer;
         public Track Track;
-        List<IParticipant> Participants;
+        public List<IParticipant> Participants;
         DateTime StartTime;
         private Random _random;
         private Dictionary<Section, SectionData> _positions;

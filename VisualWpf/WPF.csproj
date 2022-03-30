@@ -39,7 +39,6 @@
     <None Remove="assets\sections\track_section_startgrid.png" />
     <None Remove="assets\sections\track_section_straight_horizontal.png" />
     <None Remove="assets\sections\track_section_straight_vertical.png" />
-    <None Remove="grapefruit-slice-332-332.jpg" />
   </ItemGroup>
 
   <ItemGroup>
@@ -146,10 +145,6 @@
     <ProjectReference Include="..\Controller\Controller.csproj" />
     <ProjectReference Include="..\Model\Model.csproj" />
     <ProjectReference Include="..\RaceSimApplication\RaceSimApplication.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Resource Include="grapefruit-slice-332-332.jpg" />
   </ItemGroup>
 
 </Project>
