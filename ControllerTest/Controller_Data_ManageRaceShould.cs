@@ -23,28 +23,28 @@ namespace ControllerTest
         public void Init_NotNull()
         {
             Data.Initialize(_competition);
-            Data.NextRace();
+            Data.StartNextRace();
             Assert.NotNull(Data.Competition);
             Assert.NotNull(Data.CurrentRace);
-            Assert.NotNull(Data.Competition.participants);
+            Assert.NotNull(Data.Competition.Participants);
         }
         [Test]
         public void NextRace_Should_Exist()
         {
-            Data.NextRace();
+            Data.StartNextRace();
             Assert.NotNull(Data.CurrentRace);
         }
         [Test]
         public void NextRace_Should_NotExist()
         {
-            Data.NextRace();
-            Data.NextRace();
-            Data.NextRace();
-            Data.NextRace();
-            Data.NextRace();
-            Data.NextRace();
-            Data.NextRace();
-            Data.NextRace();
+            Data.StartNextRace();
+            Data.StartNextRace();
+            Data.StartNextRace();
+            Data.StartNextRace();
+            Data.StartNextRace();
+            Data.StartNextRace();
+            Data.StartNextRace();
+            Data.StartNextRace();
             Assert.IsNull(Data.CurrentRace);
         }
     }

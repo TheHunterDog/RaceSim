@@ -8,6 +8,6 @@ namespace Controller
 {
     public class NextRaceEventArgs: EventArgs
     {
-        public Race race { get; set; }
+        public Race Race { get; set; }
     }
 }

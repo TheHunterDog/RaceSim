@@ -8,17 +8,28 @@ namespace Model
 {
     public class Competition
     {
-        public List<IParticipant> participants { get; set; }
-        public Queue<Track> tracks { get; set; }
+        #region props
+        public List<IParticipant> Participants { get; set; }
+        public Queue<Track> Tracks { get; set; }
+        #endregion
+        #region constructor
         public Competition()
         {
-            participants = new List<IParticipant>();
-            tracks = new Queue<Track>();
+            Participants = new List<IParticipant>();
+            Tracks = new Queue<Track>();
         }
-        public Track NextTrack()
+        #endregion
+        #region methods
+        /**
+         * public Track? GetNextTrack()
+         * De volgende track wordt opgehaald als er geen volgede track is wordt er null terug gegeven
+         * 
+         */
+        public Track? GetNextTrack()
         {
-            return tracks.Count > 0 ? tracks.Dequeue() : null;
+            return Tracks.Count > 0 ? Tracks.Dequeue() : null;
         }
+        #endregion
     }
 }
     

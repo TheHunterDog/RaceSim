@@ -20,7 +20,7 @@ namespace ControllerTest
         [Test]
         public void NextTrack_EmptyQueue_ReturnNull()
         {
-            Assert.IsNull(_competition.NextTrack());
+            Assert.IsNull(_competition.GetNextTrack());
         }
         [Test]
         public void NextTrack_OneInQueue_ReturnTrack()
@@ -35,8 +35,8 @@ namespace ControllerTest
                 SectionTypes.LeftCorner,
                 SectionTypes.Finish
             });
-            _competition.tracks.Enqueue(t);
-            Assert.AreEqual(t, _competition.NextTrack());
+            _competition.Tracks.Enqueue(t);
+            Assert.AreEqual(t, _competition.GetNextTrack());
         }
         [Test]
         public void NextTrack_OneInQueue_RemoveTrackFromQueue()
@@ -51,9 +51,9 @@ namespace ControllerTest
                 SectionTypes.LeftCorner,
                 SectionTypes.Finish
            });
-            _competition.tracks.Enqueue(t);
-            var result = _competition.NextTrack();
-            result = _competition.NextTrack();
+            _competition.Tracks.Enqueue(t);
+            var result = _competition.GetNextTrack();
+            result = _competition.GetNextTrack();
 
             Assert.IsNull(result);
 
@@ -71,17 +71,17 @@ namespace ControllerTest
                 SectionTypes.LeftCorner,
                 SectionTypes.Finish
 });
-            _competition.tracks.Enqueue(t);
+            _competition.Tracks.Enqueue(t);
             Track a = new Track("Sprint", new SectionTypes[]
             {
                 SectionTypes.StartGrid,SectionTypes.Straight,SectionTypes.Straight,SectionTypes.Finish
             });
-            _competition.tracks.Enqueue(a);
+            _competition.Tracks.Enqueue(a);
 
-            var b = _competition.NextTrack();
+            var b = _competition.GetNextTrack();
             Assert.AreEqual(t.Name,b.Name);
             Assert.AreEqual(t.Sections, b.Sections);
-            b = _competition.NextTrack();
+            b = _competition.GetNextTrack();
             Assert.AreEqual(a.Name, b.Name);
             Assert.AreEqual(a.Sections, b.Sections);
         }

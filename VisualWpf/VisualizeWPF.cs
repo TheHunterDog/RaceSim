@@ -69,14 +69,14 @@ namespace WPF
             _currentRace = race;
         }
 
-        // Draw the track by drawing every section
+        // Draw the Track by drawing every section
         public static BitmapSource DrawTrack(Track track)
         {
-            // Create track canvas
+            // Create Track canvas
             Bitmap Canvas = Images.GetEmptyBitmap(800, 800);
             Graphics g = Graphics.FromImage(Canvas);
 
-            // Draw every section and the participants
+            // Draw every section and the Participants
             foreach (Section section in track.Sections)
             {
                 Bitmap sectionBitmap = Images.LoadImage(GetSectionVisual(section.SectionType, _currentDirection));
@@ -91,10 +91,10 @@ namespace WPF
             return Images.CreateBitmapSourceFromGdiBitmap(Canvas);
         }
 
-        // Visualize the participants on the track
+        // Visualize the Participants on the Track
         public static void VisualizeParticipants(Section section, Graphics g)
         {
-            // Fetch the participants
+            // Fetch the Participants
             IParticipant leftParticipant = _currentRace.GetSectionData(section).Left;
             IParticipant rightParticipant = _currentRace.GetSectionData(section).Right;
 
@@ -109,7 +109,7 @@ namespace WPF
             }
         }
 
-        // Draw the participant on track piece
+        // Draw the participant on Track piece
         public static void DrawParticipant(IParticipant participant, Graphics g, Section section, Side side)
         {
             (int x, int y) = CalculateParticipantPos(section.SectionType, side);
@@ -296,7 +296,7 @@ namespace WPF
         }
     }
 
-    // Define the track directions
+    // Define the Track directions
     public enum Direction
     {
         N,

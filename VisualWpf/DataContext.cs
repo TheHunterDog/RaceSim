@@ -30,10 +30,10 @@ namespace WPF
         public String TrackName { get; set; }
         public void OnDriverChanged(object sender, DriversChangedEventArgs e)
         {
-            TrackName = e.track.Name;
+            TrackName = e.Track.Name;
             changeText();
             CurrentTime = DateTime.Now;
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(""));
+           // PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(""));
         }
         private void OnPropertyChanged(string s)
         {

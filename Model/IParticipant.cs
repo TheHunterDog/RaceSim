@@ -8,9 +8,6 @@ namespace Model
 {
     public interface IParticipant
     {
-
-
-
         String Name { get; set; }
         int Points { get; set; }
         IEquipment equipment { get; set; }

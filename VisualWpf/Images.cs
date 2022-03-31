@@ -12,8 +12,6 @@ namespace WPF
 {
     static class Images
     {
-        public static int DEFAULT_WIDTH = 0;
-        public static int DEFAULT_HEIGHT = 0;
         private static Dictionary<String, System.Drawing.Bitmap> cache;
         public static System.Drawing.Bitmap LoadImage(String ImageURI)
         {
@@ -34,12 +32,16 @@ namespace WPF
                 cache.Clear();
             }
         }
+        public static void init()
+        {
+            cache = new Dictionary<String, System.Drawing.Bitmap>();
+        }
         public static System.Drawing.Bitmap GetEmptyBitmap(int width, int height)
         {
             const String Empty = "EMPTY";
             if(cache == null)
             {
-                cache = new Dictionary<String, System.Drawing.Bitmap>();
+                init();
             }
             if (!cache.ContainsKey(Empty))
             {

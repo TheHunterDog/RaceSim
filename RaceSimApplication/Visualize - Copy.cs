@@ -51,7 +51,7 @@ namespace RaceSimApplication
             // Prepare the console for visualisation
             ConsoleInit();
 
-            // Draw the track for the current race
+            // Draw the Track for the current race
             DrawTrack(_track);
             _currentRace.DriversChanged += OnDriversChanged;
         }
@@ -66,23 +66,23 @@ namespace RaceSimApplication
         // Event handler when drivers change position
         public static void OnDriversChanged(object sender, DriversChangedEventArgs e)
         {
-            DrawTrack(e.track);
+            DrawTrack(e.Track);
         }
 
         
         public static void OnNextRaceEvent(object sender, NextRaceEventArgs e)
         {
             // Reinitialize the race
-            Initialize(e.race);
+            Initialize(e.Race);
 
             // Link events
             _currentRace.DriversChanged += OnDriversChanged;
 
-            // Draw the track
+            // Draw the Track
             DrawTrack(_currentRace.Track);
         }
 
-        // Draw the track by drawing every section
+        // Draw the Track by drawing every section
         private static void DrawTrack(Track track)
         {
             _posX = 50;
@@ -91,7 +91,7 @@ namespace RaceSimApplication
             // Set cursor position before drawing
             Console.SetCursorPosition(_posX, _posY);
 
-            // Print each track section.
+            // Print each Track section.
             foreach (Section section in track.Sections)
             {
                 DrawSection(section);
@@ -145,7 +145,7 @@ namespace RaceSimApplication
             return vs;
         }
 
-        // Visualize the participants on the track section
+        // Visualize the Participants on the Track section
 /*        private static string[] VisualizeParticipants(string[] sectionVisual, IParticipant leftParticipant, IParticipant rightParticipant)
         {
             // Create returnstring with updated section visual
@@ -273,7 +273,7 @@ namespace RaceSimApplication
             };
         }
 
-        // Define the track directions
+        // Define the Track directions
         public enum Direction
         {
             N,

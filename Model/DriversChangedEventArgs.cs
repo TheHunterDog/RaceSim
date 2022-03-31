@@ -8,7 +8,15 @@ namespace Model
 {
     public class DriversChangedEventArgs: EventArgs
     {
-        public Track track;
+        #region props
+        public Track Track { get; }
+        #endregion
+        #region Constructor
+        public DriversChangedEventArgs(Track t)
+        {
+            Track = t;
+        }
+        #endregion
 
     }
 }

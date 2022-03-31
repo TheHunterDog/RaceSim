@@ -73,21 +73,21 @@ namespace WPF
             Bitmap b = Images.GetEmptyBitmap(800, 800);
             Graphics g = Graphics.FromImage(b);
 
-            foreach(Section s in t.Sections)
+            foreach (Section s in t.Sections)
             {
-                Bitmap section = Images.LoadImage(getSectionURL(s.SectionType,CurDir));
-                g.DrawImage(section,posX,posY, 100, 100);
+                Bitmap section = Images.LoadImage(getSectionURL(s.SectionType, CurDir));
+                g.DrawImage(section, posX, posY, 100, 100);
                 changeDirection(s.SectionType);
 
                 UpdateCursor();
             }
-            return Images.CreateBitmapSourceFromGdiBitmap(Images.GetEmptyBitmap(Images.DEFAULT_WIDTH,Images.DEFAULT_HEIGHT));
+            return Images.CreateBitmapSourceFromGdiBitmap(b);
         }
 
-        // Visualize the participants on the track
+        // Visualize the Participants on the Track
         public static void VisualizeParticipants(Section section, Graphics g)
         {
-            // Fetch the participants
+            // Fetch the Participants
             IParticipant leftParticipant = _Race.GetSectionData(section).Left;
             IParticipant rightParticipant = _Race.GetSectionData(section).Right;
 
@@ -102,7 +102,7 @@ namespace WPF
             }
         }
 
-        // Draw the participant on track piece
+        // Draw the participant on Track piece
         public static void DrawParticipant(IParticipant participant, Graphics g, Section section, Controller.Side side)
         {
             (int x, int y) = CalculateParticipantPos(section.SectionType, side);

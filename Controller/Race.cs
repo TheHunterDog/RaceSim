@@ -11,13 +11,15 @@ namespace Controller
     public class Race
     {
         private System.Timers.Timer timer;
-        public Track Track;
-        public List<IParticipant> Participants;
+        public Track Track { get; }
+        public List<IParticipant> Participants { get; }
         DateTime StartTime;
         private Random _random;
         private Dictionary<Section, SectionData> _positions;
-        private Dictionary<IParticipant, int> _wins;
-        public int winLimit = 1;
+        private Dictionary<IParticipant, int> _wins { get; }
+
+        private int winLimit = 3;
+        //todo Set to property
         public event EventHandler<EventArgs> End;
 
         public int gridsize = 100;
@@ -25,24 +27,18 @@ namespace Controller
         public void OnTimedEvent(Object source, ElapsedEventArgs e)
         {
             MoveParticipants();
-            DriversChanged?.Invoke(this, new DriversChangedEventArgs() { track = this.Track });
+            DriversChanged?.Invoke(this, new DriversChangedEventArgs(this.Track));
 
-            if (checkWin()) { 
+            if (checkWin(_wins)) { 
                 End?.Invoke(this, e); 
-            }
+           }
         }
         public event EventHandler<DriversChangedEventArgs> DriversChanged;
         public void setRandomBroken(Object source, ElapsedEventArgs e)
         {
-
-            foreach (var participant in Participants)
-            {
-                participant.equipment.isBroken = false;
-            }
-
             Random r = new Random();
             
-            int i = r.Next(1,Participants.Count * 100);
+            int i = r.Next(1,Participants.Count);
             if(Participants.Count >= i && i >= 1 && Participants[i - 1] != null)
             {
                 i -= 1;
@@ -74,18 +70,20 @@ namespace Controller
             DriversChanged = null;
             timer.Stop();
             End = null;
+            _wins.Clear();
         }
-        public bool checkWin()
+        //check if all Participants have reached winLimit
+        public bool checkWin(Dictionary<IParticipant,int> winners)
         {
             for (int i = 0; i < _wins.Count; i++)
             {
-                KeyValuePair<IParticipant, int> w = _wins.ElementAt(i);
-                if (w.Value != winLimit+1)
+                KeyValuePair<IParticipant, int> w = winners.ElementAt(i);
+                if (w.Value != winLimit)
                 {
                     return false;
                 }
             }
-            if(_wins.Count != 0)
+            if(winners.Count != 0 && winners.Count == this.Participants.Count)
             {
                 _wins.Clear();
                 return true;
@@ -98,19 +96,20 @@ namespace Controller
             {
                 if (winLimit != _wins[p])
                 {
-                    _wins[p] +=1;
+                    _wins[p] += 1;
                     return false;
                 }
                 else
                 {
-                    _wins[p] +=1;
+                    _wins[p] += 1;
                     return true;
-                    p = null;
+                    //p = null;
                 }
             }
             else
-            {
-                _wins[p] = 1;
+            { 
+                _wins.Add(p, 1);
+               // _wins[p] = 1;
                 return false;
             }
         }
