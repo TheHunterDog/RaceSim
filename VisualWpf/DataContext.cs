@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Controller;
-using Microsoft.VisualBasic.CompilerServices;
 using Model;
 
 namespace WPF
@@ -13,12 +8,9 @@ namespace WPF
     public class DataContext : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler? PropertyChanged;
-        public Func<String> Track = () =>
-        {
-            return Data.CurrentRace.Track.Name;
-        };
-        private String _windesheim = "aap";
-        public String Windesheim {
+        public Func<string> Track = () => Data.CurrentRace == null ? "DEFAULT" : Data.CurrentRace.Track.Name;
+        private string _windesheim = "aap";
+        public string Windesheim {
             get => _windesheim;
             set 
             { 
@@ -27,11 +19,11 @@ namespace WPF
             } 
         }
         public DateTime CurrentTime { get; private set; }
-        public String TrackName { get; set; }
+        public String? TrackName { get; set; }
         public void OnDriverChanged(object sender, DriversChangedEventArgs e)
         {
             TrackName = e.Track.Name;
-            changeText();
+            ChangeText();
             CurrentTime = DateTime.Now;
            // PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(""));
         }
@@ -39,17 +31,11 @@ namespace WPF
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(s));
         }
-        public void changeText()
+
+        private void ChangeText()
         {
-            if(Windesheim == "Windesheim")
-            {
-                Windesheim = "Hello world";
-            }
-            else
-            {
-                Windesheim = "Windesheim";
-            }
-    }   
+            Windesheim = Windesheim == "Windesheim" ? "Hello world" : "Windesheim";
+        }   
     }
 }
 

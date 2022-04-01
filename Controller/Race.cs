@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Timers;
+﻿using System.Timers;
 using Model;
 
 namespace Controller
@@ -12,47 +7,50 @@ namespace Controller
     {
         private System.Timers.Timer timer;
         public Track Track { get; }
-        public List<IParticipant> Participants { get; }
-        DateTime StartTime;
-        private Random _random;
-        private Dictionary<Section, SectionData> _positions;
-        private Dictionary<IParticipant, int> _wins { get; }
+        public List<IParticipant?> Participants { get; }
+        private readonly Random _random;
+        private readonly Dictionary<Section, SectionData> _positions;
+        private Dictionary<IParticipant, int> Wins { get; }
 
         private int winLimit = 3;
         //todo Set to property
-        public event EventHandler<EventArgs> End;
+        public event EventHandler<EventArgs>? End;
 
-        public int gridsize = 100;
+        private readonly int _gridsize = 100;
         #region Events
         public void OnTimedEvent(Object source, ElapsedEventArgs e)
         {
             MoveParticipants();
             DriversChanged?.Invoke(this, new DriversChangedEventArgs(this.Track));
 
-            if (checkWin(_wins)) { 
+            if (CheckWin(Wins)) { 
                 End?.Invoke(this, e); 
-           }
+            }
         }
-        public event EventHandler<DriversChangedEventArgs> DriversChanged;
-        public void setRandomBroken(Object source, ElapsedEventArgs e)
+        public event EventHandler<DriversChangedEventArgs>? DriversChanged;
+
+        private void SetRandomBroken(Object source, ElapsedEventArgs e)
         {
-            Random r = new Random();
+            var r = new Random();
             
-            int i = r.Next(1,Participants.Count);
-            if(Participants.Count >= i && i >= 1 && Participants[i - 1] != null)
+            var i = r.Next(1,Participants.Count);
+            if(Participants.Count >= i && i >= 1)
             {
                 i -= 1;
-                if (!Participants[i].equipment.isBroken)
+                if (Participants[i] != null)
                 {
-                    Participants[i].equipment
-                        .isBroken = true;
-                }
-                else
-                {
-                    Participants[i].equipment.isBroken = false;
-                    Participants[i].equipment.Performance -= r.Next(0, 3);
-                    Participants[i].equipment.Quality -= r.Next(0, 4);
-                    
+                    if (!Participants[i]!.equipment.isBroken)
+                    {
+                        Participants[i]!.equipment
+                            .isBroken = true;
+                    }
+                    else
+                    {
+                        Participants[i]!.equipment.isBroken = false;
+                        Participants[i]!.equipment.Performance -= r.Next(0, 3);
+                        Participants[i]!.equipment.Quality -= r.Next(0, 4);
+
+                    }
                 }
             }
 
@@ -70,14 +68,14 @@ namespace Controller
             DriversChanged = null;
             timer.Stop();
             End = null;
-            _wins.Clear();
+            Wins.Clear();
         }
         //check if all Participants have reached winLimit
-        public bool checkWin(Dictionary<IParticipant,int> winners)
+        private bool CheckWin(Dictionary<IParticipant, int> winners)
         {
-            for (int i = 0; i < _wins.Count; i++)
+            for (var i = 0; i < Wins.Count; i++)
             {
-                KeyValuePair<IParticipant, int> w = winners.ElementAt(i);
+                var w = winners.ElementAt(i);
                 if (w.Value != winLimit)
                 {
                     return false;
@@ -85,30 +83,30 @@ namespace Controller
             }
             if(winners.Count != 0 && winners.Count == this.Participants.Count)
             {
-                _wins.Clear();
+                Wins.Clear();
                 return true;
             }
             return false;
         }
-        private bool ParticipantWin(IParticipant p)
+        private bool ParticipantWin(IParticipant? p)
         {
-            if (_wins.ContainsKey(p))
+            if (Wins.ContainsKey(p))
             {
-                if (winLimit != _wins[p])
+                if (winLimit != Wins[p])
                 {
-                    _wins[p] += 1;
+                    Wins[p] += 1;
                     return false;
                 }
                 else
                 {
-                    _wins[p] += 1;
+                    Wins[p] += 1;
                     return true;
                     //p = null;
                 }
             }
             else
             { 
-                _wins.Add(p, 1);
+                Wins.Add(p, 1);
                // _wins[p] = 1;
                 return false;
             }
@@ -118,17 +116,9 @@ namespace Controller
 
             for(int i = 0; i < _positions.Count; i++)
             {
-                KeyValuePair<Section, SectionData> pair = _positions.ElementAt(i);
-                KeyValuePair<Section, SectionData> pair2;
-                bool finishNext = false;
-                if (i == _positions.Count - 1)
-                {
-                     pair2 = _positions.ElementAt(0);
-                }
-                else
-                {
-                    pair2 = _positions.ElementAt(i + 1);
-                }
+                var pair = _positions.ElementAt(i);
+                bool finishNext;
+                var pair2 = i == _positions.Count - 1 ? _positions.ElementAt(0) : _positions.ElementAt(i + 1);
                 
                 if(pair2.Key.SectionType == SectionTypes.Finish)
                 {
@@ -138,7 +128,7 @@ namespace Controller
                 
                 if(pair.Value.Left != null)
                 {
-                    int speed = 0;
+                    var speed = 0;
                     if (pair.Value.Left.equipment.isBroken)
                     {
                         speed = 0;
@@ -149,7 +139,7 @@ namespace Controller
 
                         pair.Value.DistanceLeft += speed;
                     }
-                    if (pair.Value.DistanceLeft >= gridsize && (pair2.Value.Right == null || pair2.Value.Left == null))
+                    if (pair.Value.DistanceLeft >= _gridsize && (pair2.Value.Right == null || pair2.Value.Left == null))
                     {
                         if (pair2.Value.Right == null)
                         {
@@ -198,7 +188,7 @@ namespace Controller
                     {
                         speed = pair.Value.Right.equipment.Speed * pair.Value.Right.equipment.Performance;
                     }
-                    if (pair.Value.DistacneRight >= gridsize && (pair2.Value.Right == null || pair2.Value.Left == null))
+                    if (pair.Value.DistacneRight >= _gridsize && (pair2.Value.Right == null || pair2.Value.Left == null))
                     {
                         if (pair2.Value.Right == null)
                         {
@@ -234,17 +224,17 @@ namespace Controller
         }
 
 
-        public Race(Track track, List<IParticipant> participants)
+        public Race(Track track, List<IParticipant?> participants)
         {
             Track = track;
             Participants = participants;
             _positions = new Dictionary<Section, SectionData>();
-            _wins = new Dictionary<IParticipant, int>();
+            Wins = new Dictionary<IParticipant?, int>();
             _random = new Random(DateTime.Now.Millisecond);
             placeParticipants();
             timer = new System.Timers.Timer(500);
             timer.Elapsed += OnTimedEvent;
-            timer.Elapsed += setRandomBroken;
+            timer.Elapsed += SetRandomBroken;
             Start();
         }
         void placeParticipants()
@@ -263,7 +253,7 @@ namespace Controller
 
         void RandommizeEquipment()
         {
-            foreach (Driver participant in Participants)
+            foreach (Driver? participant in Participants)
             {
                 participant.equipment.Performance = _random.Next();
                 participant.equipment.Speed = _random.Next();

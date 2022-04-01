@@ -9,13 +9,13 @@ namespace Model
     public class Competition
     {
         #region props
-        public List<IParticipant> Participants { get; set; }
+        public List<IParticipant?> Participants { get; set; }
         public Queue<Track> Tracks { get; set; }
         #endregion
         #region constructor
         public Competition()
         {
-            Participants = new List<IParticipant>();
+            Participants = new List<IParticipant?>();
             Tracks = new Queue<Track>();
         }
         #endregion

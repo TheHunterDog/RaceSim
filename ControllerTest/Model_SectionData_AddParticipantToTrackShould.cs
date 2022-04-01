@@ -12,7 +12,7 @@ namespace ControllerTest
     public class Model_SectionData_AddParticipantToTrackShould
     {
         private SectionData _SectionData;
-        private Driver d;
+        private Driver? d;
         [SetUp]
         public void SetUp()
         {

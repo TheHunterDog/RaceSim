@@ -33,7 +33,7 @@ namespace WPF
             Images.init();
             Data.Initialize(new Competition());
             Data.NextRaceEvent += OnNextRaceEvent;
-            Data.StartNextRace();
+            Data.StartNextRace(Data.Competition);
         }
         public void OnDriversChanged(object sender, DriversChangedEventArgs e)
         {

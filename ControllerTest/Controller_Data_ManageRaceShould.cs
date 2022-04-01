@@ -23,7 +23,7 @@ namespace ControllerTest
         public void Init_NotNull()
         {
             Data.Initialize(_competition);
-            Data.StartNextRace();
+            Data.StartNextRace(_competition);
             Assert.NotNull(Data.Competition);
             Assert.NotNull(Data.CurrentRace);
             Assert.NotNull(Data.Competition.Participants);
@@ -31,20 +31,13 @@ namespace ControllerTest
         [Test]
         public void NextRace_Should_Exist()
         {
-            Data.StartNextRace();
+            Data.StartNextRace(_competition);
             Assert.NotNull(Data.CurrentRace);
         }
         [Test]
         public void NextRace_Should_NotExist()
         {
-            Data.StartNextRace();
-            Data.StartNextRace();
-            Data.StartNextRace();
-            Data.StartNextRace();
-            Data.StartNextRace();
-            Data.StartNextRace();
-            Data.StartNextRace();
-            Data.StartNextRace();
+            Data.StartNextRace(_competition);
             Assert.IsNull(Data.CurrentRace);
         }
     }

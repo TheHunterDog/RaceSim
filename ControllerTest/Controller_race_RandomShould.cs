@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Controller;
+using Model;
 
 namespace ControllerTest
 {
@@ -15,7 +16,7 @@ namespace ControllerTest
             [SetUp]
             public void SetUp()
             {
-                _race = new Race(new Model.Track("Aap", new List<Model.SectionTypes>().ToArray()), new List<Model.IParticipant>() { new Model.Driver("Mark",2,new Model.Car(3,3,3,false),Model.TeamColors.Blue)});
+                _race = new Race(new Model.Track("Aap", new List<Model.SectionTypes>().ToArray()), new List<IParticipant?>() { new Model.Driver("Mark",2,new Model.Car(3,3,3,false),Model.TeamColors.Blue)});
             }
             [Test]
             public void CheckWin_False()

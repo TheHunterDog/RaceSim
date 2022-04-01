@@ -95,8 +95,8 @@ namespace WPF
         public static void VisualizeParticipants(Section section, Graphics g)
         {
             // Fetch the Participants
-            IParticipant leftParticipant = _currentRace.GetSectionData(section).Left;
-            IParticipant rightParticipant = _currentRace.GetSectionData(section).Right;
+            IParticipant? leftParticipant = _currentRace.GetSectionData(section).Left;
+            IParticipant? rightParticipant = _currentRace.GetSectionData(section).Right;
 
             if (leftParticipant != null)
             {
@@ -110,7 +110,7 @@ namespace WPF
         }
 
         // Draw the participant on Track piece
-        public static void DrawParticipant(IParticipant participant, Graphics g, Section section, Side side)
+        public static void DrawParticipant(IParticipant? participant, Graphics g, Section section, Side side)
         {
             (int x, int y) = CalculateParticipantPos(section.SectionType, side);
             Bitmap participantBitmap = Images.LoadImage(FetchParticipantBitmapUrl(participant));
@@ -150,7 +150,7 @@ namespace WPF
             };
         }
 
-        public static string FetchParticipantBitmapUrl(IParticipant participant)
+        public static string FetchParticipantBitmapUrl(IParticipant? participant)
         {
             return _currentDirection switch
             {

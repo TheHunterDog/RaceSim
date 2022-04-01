@@ -1,13 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 
 namespace Controller
 {
+    /**
+     * public class NextRaceEventArgs: EventArgs
+     * 
+     */
     public class NextRaceEventArgs: EventArgs
     {
-        public Race Race { get; set; }
+        public Race? Race { get; init;}
     }
 }
