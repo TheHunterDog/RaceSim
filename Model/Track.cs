@@ -1,34 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace Model;
 
-namespace Model
+public class Track
 {
-    public class Track { 
-         public String Name { get; set; }
-        public LinkedList<Section> Sections { get; set; }
+    public Track(string? name, SectionTypes[] sections)
+    {
+        Name = name;
+        Sections = ConvertToSection(sections);
+        // this.Sections = sections;
+    }
 
-        public Track(String name, SectionTypes[] sections )
-        {
-            this.Name = name;
-            this.Sections = ConvertToSection(sections);
-           // this.Sections = sections;
-        }
+    public string? Name { get; set; }
+    public LinkedList<Section> Sections { get; set; }
 
-        private LinkedList<Section> ConvertToSection(SectionTypes[] sectionTypes)
-        {
-            LinkedList<Section> result = new LinkedList<Section>();
-            if (sectionTypes != null)
-            {
-                foreach (SectionTypes sectionType in sectionTypes)
-                {
-                    result.AddLast(new Section(sectionType));
-                }
-            }
+    private static LinkedList<Section> ConvertToSection(IEnumerable<SectionTypes> sectionTypes)
+    {
+        var result = new LinkedList<Section>();
+        foreach (var sectionType in sectionTypes) result.AddLast(new Section(sectionType));
 
-            return result;
-        }
+        return result;
     }
 }

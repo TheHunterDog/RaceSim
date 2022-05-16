@@ -7,19 +7,21 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Window.DataContext>
-        <local:DataContext/>
+        <local:DataContext />
     </Window.DataContext>
     <Grid Background="#FF407635">
         <DockPanel>
-            <Label Content="{Binding TrackName, BindsDirectlyToSource=False, IsAsync=False, NotifyOnSourceUpdated=False, NotifyOnTargetUpdated=False, NotifyOnValidationError=False, ValidatesOnDataErrors=False, ValidatesOnExceptions=False, ValidatesOnNotifyDataErrors=True}"/>
+            <Label
+                Content="{Binding Trackname, BindsDirectlyToSource=False, IsAsync=False, NotifyOnSourceUpdated=False, NotifyOnTargetUpdated=False, NotifyOnValidationError=False, ValidatesOnDataErrors=False, ValidatesOnExceptions=False, ValidatesOnNotifyDataErrors=True}" />
             <Menu DockPanel.Dock="Top" VerticalAlignment="Top" Height="20">
                 <MenuItem Header="Menu">
-                    <MenuItem Header="OpenWindow" Click="Open_WINdow"/>
-                    <MenuItem Header="Open Other window" Click="open_OtherWindow"/>
-                    <MenuItem Header="Close" Click="MenuItem_Exit_Click"/>
+                    <MenuItem Header="Open Leaderboard" Click="Open_Leaderboard" />
+                    <MenuItem Header="Batman" Click="BatmanWindow" />
+                    <MenuItem Header="RaceStats" Click="RaceStatsWindow" />
+                    <MenuItem Header="Close" Click="ExitClick" />
                 </MenuItem>
             </Menu>
         </DockPanel>
-        <Image Name="TrackImage"/>
+        <Image Name="TrackImage" />
     </Grid>
 </Window>

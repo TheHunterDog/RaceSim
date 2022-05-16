@@ -1,16 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace Model;
 
-namespace Model
+public interface IParticipant
 {
-    public interface IParticipant
-    {
-        String Name { get; set; }
-        int Points { get; set; }
-        IEquipment equipment { get; set; }
-        TeamColors TeamColors { get; set; }
-    }
+    string Name { get; set; }
+    int Points { get; set; }
+    IEquipment Equipment { get; set; }
+    TeamColors TeamColors { get; set; }
 }

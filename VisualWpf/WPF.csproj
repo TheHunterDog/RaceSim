@@ -1,150 +1,150 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <OutputType>WinExe</OutputType>
-    <TargetFramework>net6.0-windows</TargetFramework>
-    <Nullable>enable</Nullable>
-    <UseWPF>true</UseWPF>
-  </PropertyGroup>
+    <PropertyGroup>
+        <OutputType>WinExe</OutputType>
+        <TargetFramework>net6.0-windows</TargetFramework>
+        <Nullable>enable</Nullable>
+        <UseWPF>true</UseWPF>
+    </PropertyGroup>
 
-  <ItemGroup>
-    <None Remove="assets\Attributes\Broken.png" />
-    <None Remove="assets\Attributes\BrokenFire.png" />
-    <None Remove="assets\drivers\driver_blue_horizontal_left.png" />
-    <None Remove="assets\drivers\driver_blue_horizontal_right.png" />
-    <None Remove="assets\drivers\driver_blue_vertical_down.png" />
-    <None Remove="assets\drivers\driver_blue_vertical_top.png" />
-    <None Remove="assets\drivers\driver_green_horizontal_left.png" />
-    <None Remove="assets\drivers\driver_green_horizontal_right.png" />
-    <None Remove="assets\drivers\driver_green_vertical_down.png" />
-    <None Remove="assets\drivers\driver_green_vertical_top.png" />
-    <None Remove="assets\drivers\driver_grey_horizontal_left.png" />
-    <None Remove="assets\drivers\driver_grey_horizontal_right.png" />
-    <None Remove="assets\drivers\driver_grey_vertical_down.png" />
-    <None Remove="assets\drivers\driver_grey_vertical_top.png" />
-    <None Remove="assets\drivers\driver_red_horizontal_left.png" />
-    <None Remove="assets\drivers\driver_red_horizontal_right.png" />
-    <None Remove="assets\drivers\driver_red_vertical_down.png" />
-    <None Remove="assets\drivers\driver_red_vertical_top.png" />
-    <None Remove="assets\drivers\driver_yellow_horizontal_left.png" />
-    <None Remove="assets\drivers\driver_yellow_horizontal_right.png" />
-    <None Remove="assets\drivers\driver_yellow_vertical_down.png" />
-    <None Remove="assets\drivers\driver_yellow_vertical_top.png" />
-    <None Remove="assets\sections\track_section_corner_bottomleft.png" />
-    <None Remove="assets\sections\track_section_corner_bottomright.png" />
-    <None Remove="assets\sections\track_section_corner_topleft.png" />
-    <None Remove="assets\sections\track_section_corner_topright.png" />
-    <None Remove="assets\sections\track_section_finish_horizontal.png" />
-    <None Remove="assets\sections\track_section_finish_vertical.png" />
-    <None Remove="assets\sections\track_section_startgrid.png" />
-    <None Remove="assets\sections\track_section_straight_horizontal.png" />
-    <None Remove="assets\sections\track_section_straight_vertical.png" />
-  </ItemGroup>
+    <ItemGroup>
+        <None Remove="assets\Attributes\Broken.png"/>
+        <None Remove="assets\Attributes\BrokenFire.png"/>
+        <None Remove="assets\drivers\driver_blue_horizontal_left.png"/>
+        <None Remove="assets\drivers\driver_blue_horizontal_right.png"/>
+        <None Remove="assets\drivers\driver_blue_vertical_down.png"/>
+        <None Remove="assets\drivers\driver_blue_vertical_top.png"/>
+        <None Remove="assets\drivers\driver_green_horizontal_left.png"/>
+        <None Remove="assets\drivers\driver_green_horizontal_right.png"/>
+        <None Remove="assets\drivers\driver_green_vertical_down.png"/>
+        <None Remove="assets\drivers\driver_green_vertical_top.png"/>
+        <None Remove="assets\drivers\driver_grey_horizontal_left.png"/>
+        <None Remove="assets\drivers\driver_grey_horizontal_right.png"/>
+        <None Remove="assets\drivers\driver_grey_vertical_down.png"/>
+        <None Remove="assets\drivers\driver_grey_vertical_top.png"/>
+        <None Remove="assets\drivers\driver_red_horizontal_left.png"/>
+        <None Remove="assets\drivers\driver_red_horizontal_right.png"/>
+        <None Remove="assets\drivers\driver_red_vertical_down.png"/>
+        <None Remove="assets\drivers\driver_red_vertical_top.png"/>
+        <None Remove="assets\drivers\driver_yellow_horizontal_left.png"/>
+        <None Remove="assets\drivers\driver_yellow_horizontal_right.png"/>
+        <None Remove="assets\drivers\driver_yellow_vertical_down.png"/>
+        <None Remove="assets\drivers\driver_yellow_vertical_top.png"/>
+        <None Remove="assets\sections\track_section_corner_bottomleft.png"/>
+        <None Remove="assets\sections\track_section_corner_bottomright.png"/>
+        <None Remove="assets\sections\track_section_corner_topleft.png"/>
+        <None Remove="assets\sections\track_section_corner_topright.png"/>
+        <None Remove="assets\sections\track_section_finish_horizontal.png"/>
+        <None Remove="assets\sections\track_section_finish_vertical.png"/>
+        <None Remove="assets\sections\track_section_startgrid.png"/>
+        <None Remove="assets\sections\track_section_straight_horizontal.png"/>
+        <None Remove="assets\sections\track_section_straight_vertical.png"/>
+    </ItemGroup>
 
-  <ItemGroup>
-    <Content Include="assets\Attributes\Broken.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="assets\Attributes\BrokenFire.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="assets\drivers\driver_blue_horizontal_left.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="assets\drivers\driver_blue_horizontal_right.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="assets\drivers\driver_blue_vertical_down.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="assets\drivers\driver_blue_vertical_top.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="assets\drivers\driver_green_horizontal_left.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="assets\drivers\driver_green_horizontal_right.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="assets\drivers\driver_green_vertical_down.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="assets\drivers\driver_green_vertical_top.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="assets\drivers\driver_grey_horizontal_left.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="assets\drivers\driver_grey_horizontal_right.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="assets\drivers\driver_grey_vertical_down.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="assets\drivers\driver_grey_vertical_top.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="assets\drivers\driver_red_horizontal_left.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="assets\drivers\driver_red_horizontal_right.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="assets\drivers\driver_red_vertical_down.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="assets\drivers\driver_red_vertical_top.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="assets\drivers\driver_yellow_horizontal_left.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="assets\drivers\driver_yellow_horizontal_right.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="assets\drivers\driver_yellow_vertical_down.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="assets\drivers\driver_yellow_vertical_top.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="assets\sections\track_section_corner_bottomleft.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="assets\sections\track_section_corner_bottomright.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="assets\sections\track_section_corner_topleft.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="assets\sections\track_section_corner_topright.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="assets\sections\track_section_finish_horizontal.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="assets\sections\track_section_finish_vertical.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="assets\sections\track_section_startgrid.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="assets\sections\track_section_straight_horizontal.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="assets\sections\track_section_straight_vertical.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
+    <ItemGroup>
+        <Content Include="assets\Attributes\Broken.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="assets\Attributes\BrokenFire.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="assets\drivers\driver_blue_horizontal_left.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="assets\drivers\driver_blue_horizontal_right.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="assets\drivers\driver_blue_vertical_down.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="assets\drivers\driver_blue_vertical_top.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="assets\drivers\driver_green_horizontal_left.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="assets\drivers\driver_green_horizontal_right.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="assets\drivers\driver_green_vertical_down.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="assets\drivers\driver_green_vertical_top.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="assets\drivers\driver_grey_horizontal_left.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="assets\drivers\driver_grey_horizontal_right.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="assets\drivers\driver_grey_vertical_down.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="assets\drivers\driver_grey_vertical_top.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="assets\drivers\driver_red_horizontal_left.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="assets\drivers\driver_red_horizontal_right.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="assets\drivers\driver_red_vertical_down.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="assets\drivers\driver_red_vertical_top.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="assets\drivers\driver_yellow_horizontal_left.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="assets\drivers\driver_yellow_horizontal_right.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="assets\drivers\driver_yellow_vertical_down.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="assets\drivers\driver_yellow_vertical_top.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="assets\sections\track_section_corner_bottomleft.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="assets\sections\track_section_corner_bottomright.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="assets\sections\track_section_corner_topleft.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="assets\sections\track_section_corner_topright.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="assets\sections\track_section_finish_horizontal.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="assets\sections\track_section_finish_vertical.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="assets\sections\track_section_startgrid.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="assets\sections\track_section_straight_horizontal.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="assets\sections\track_section_straight_vertical.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+    </ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="System.Drawing.Common" Version="6.0.0" />
-  </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="System.Drawing.Common" Version="6.0.0"/>
+    </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Controller\Controller.csproj" />
-    <ProjectReference Include="..\Model\Model.csproj" />
-    <ProjectReference Include="..\RaceSimApplication\RaceSimApplication.csproj" />
-  </ItemGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\Controller\Controller.csproj"/>
+        <ProjectReference Include="..\Model\Model.csproj"/>
+        <ProjectReference Include="..\RaceSimApplication\RaceSimApplication.csproj"/>
+    </ItemGroup>
 
 </Project>

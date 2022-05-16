@@ -1,56 +1,61 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace Model;
 
-namespace Model
+public class Car : IEquipment
 {
-    public class Car : IEquipment
-    {
-        #region private_varables
-        private static int MINQUALITY = 20;
-        private static int MINPERFORMANCE = 20;
-        private static int MINSPEED = 20;
+    #region constructor
 
-        private int _quality;
-        private int _performance;
-        private int _speed;
-        #endregion
-        #region props
-        public int Quality { get => _quality; set { 
-            if(value > MINQUALITY)
-                {
-                    _quality = value;
-                }
-            }
-        }
-        public int Performance { get => _performance ; set
-            {
-                if(value > MINPERFORMANCE)
-                {
-                    _performance = value;
-                }
-            }
-        }
-        public int Speed { get => _speed ; set
-            {
-                if(value > MINSPEED)
-                {
-                    _speed = value;
-                }
-            }
-        }
-        public bool isBroken { get ; set ; }
-        #endregion
-        #region constructor
-        public Car(int quality, int performance, int speed, bool isBroken)
-        {
-            Quality = quality;
-            Performance = performance;
-            Speed = speed;
-            this.isBroken = isBroken;
-        }
-        #endregion
+    public Car(int quality, int performance, int speed, bool isBroken)
+    {
+        Quality = quality;
+        Performance = performance;
+        Speed = speed;
+        IsBroken = isBroken;
     }
+
+    #endregion
+
+    #region private_varables
+
+    private const int MinQuality = 20;
+    private const int MinPerformance = 20;
+    private const int MinSpeed = 20;
+
+    private int _quality;
+    private int _performance;
+    private int _speed;
+
+    #endregion
+
+    #region props
+
+    public int Quality
+    {
+        get => _quality;
+        set
+        {
+            if (value > MinQuality) _quality = value;
+        }
+    }
+
+    public int Performance
+    {
+        get => _performance;
+        set
+        {
+            if (value > MinPerformance) _performance = value;
+        }
+    }
+
+    public int Speed
+    {
+        get => _speed;
+        set
+        {
+            if (value > MinSpeed) _speed = value;
+        }
+    }
+
+    public bool IsBroken { get; set; }
+
+    #endregion
 }

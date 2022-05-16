@@ -1,86 +1,76 @@
-﻿using Controller;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-
-using Model;
-using Controller;
 using System.Windows.Threading;
-using WPF;
+using Controller;
+using Model;
 
-namespace WPF
+namespace WPF;
+
+/// <summary>
+///     Interaction logic for MainWindow.xaml
+/// </summary>
+public partial class MainWindow
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
-    public partial class MainWindow : Window
+    private Batman? _batmanWindow;
+    private Leaderboard? _leaderboard;
+    private RaceStatsWindow? _raceStatsWindow;
+
+    public MainWindow()
     {
-        public MainWindow()
-        {
-            InitializeComponent();
-            //ImageHandler.Initialize();
-            Images.init();
-            Data.Initialize(new Competition());
-            Data.NextRaceEvent += OnNextRaceEvent;
-            Data.StartNextRace(Data.Competition);
-        }
-        public void OnDriversChanged(object sender, DriversChangedEventArgs e)
-        {
-            this.TrackImage.Dispatcher.BeginInvoke(
+        InitializeComponent();
+        //ImageHandler.Initialize();
+        Images.Init();
+        Data.Initialize(new Competition());
+        Data.NextRaceEvent += OnNextRaceEvent!;
+        Data.StartNextRace(Data.Competition);
+    }
+
+    private void OnDriversChanged(object sender, DriversChangedEventArgs e)
+    {
+        TrackImage.Dispatcher.BeginInvoke(
             DispatcherPriority.Render,
             new Action(() =>
             {
-                this.TrackImage.Source = null;
-                this.TrackImage.Source = WPF.VisualizeWPF.DrawTrack(e.Track);
+                TrackImage.Source = null;
+                TrackImage.Source = VisualizeWpf.DrawTrack(e.Track);
             }));
-        }
-        public void OnNextRaceEvent(object sender, NextRaceEventArgs e)
+    }
+
+    private void OnNextRaceEvent(object sender, NextRaceEventArgs e)
+    {
+        Images.Clear();
+        //WPF.Visualize.Init(e.race);
+        if (e.Race != null)
         {
-            Images.Clear();
-            //WPF.Visualize.Init(e.race);
-            WPF.VisualizeWPF.Initialize(e.Race);
-            DataContext d = new DataContext();
+            VisualizeWpf.Initialize(e.Race);
+            var d = new DataContext();
 
-            e.Race.DriversChanged += OnDriversChanged;
-            e.Race.DriversChanged += d.OnDriverChanged;
-
+            e.Race.DriversChanged += OnDriversChanged!;
+            e.Race.DriversChanged += d.OnDriverChanged!;
         }
+    }
 
-        private void MenuItem_Exit_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
-            Application.Current.Shutdown();
-        }
-        private Batman batmanWindow = null;
-        private Windesheim windesheimWindow = null;
-        private void Open_WINdow(object sender, RoutedEventArgs e)
-        {
-            if(windesheimWindow == null)
-            {
-                windesheimWindow = new WPF.Windesheim();
+    private void ExitClick(object sender, RoutedEventArgs e)
+    {
+        Close();
+        Application.Current.Shutdown();
+    }
 
-            }
-            windesheimWindow.Show();
-        }
+    private void Open_Leaderboard(object sender, RoutedEventArgs e)
+    {
+        _leaderboard ??= new Leaderboard();
+        _leaderboard?.Show();
+    }
 
-        private void open_OtherWindow(object sender, RoutedEventArgs e)
-        {
-            if (batmanWindow == null)
-            {
-                batmanWindow = new WPF.Batman();
-            }
-            batmanWindow.Show();
-        }
+    private void BatmanWindow(object sender, RoutedEventArgs e)
+    {
+        _batmanWindow ??= new Batman();
+        _batmanWindow?.Show();
+    }
+
+    private void RaceStatsWindow(object sender, RoutedEventArgs e)
+    {
+        _raceStatsWindow ??= new RaceStatsWindow();
+        _raceStatsWindow?.Show();
     }
 }

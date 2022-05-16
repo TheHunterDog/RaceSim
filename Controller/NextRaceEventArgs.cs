@@ -1,13 +1,9 @@
-﻿
+﻿namespace Controller;
 
-namespace Controller
+/**
+ * public class NextRaceEventArgs: EventArgs
+ */
+public class NextRaceEventArgs : EventArgs
 {
-    /**
-     * public class NextRaceEventArgs: EventArgs
-     * 
-     */
-    public class NextRaceEventArgs: EventArgs
-    {
-        public Race? Race { get; init;}
-    }
+    public Race? Race { get; set; }
 }
