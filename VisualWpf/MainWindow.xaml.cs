@@ -11,8 +11,8 @@ namespace WPF;
 /// </summary>
 public partial class MainWindow
 {
-    private Batman? _batmanWindow;
-    private Leaderboard? _leaderboard;
+    private BasicStats? _basicStats;
+    private Saboteur? _saboteur;
     private RaceStatsWindow? _raceStatsWindow;
 
     public MainWindow()
@@ -56,21 +56,21 @@ public partial class MainWindow
         Application.Current.Shutdown();
     }
 
-    private void Open_Leaderboard(object sender, RoutedEventArgs e)
+    private void Open_Saboteur(object sender, RoutedEventArgs e)
     {
-        _leaderboard ??= new Leaderboard();
-        _leaderboard?.Show();
+        _saboteur ??= new Saboteur();
+        _saboteur?.Show();
     }
 
-    private void BatmanWindow(object sender, RoutedEventArgs e)
+    private void Open_BasicStatsWindow(object sender, RoutedEventArgs e)
     {
-        _batmanWindow ??= new Batman();
-        _batmanWindow?.Show();
+        _basicStats ??= new BasicStats();
+        _basicStats?.Show();
     }
 
-    private void RaceStatsWindow(object sender, RoutedEventArgs e)
+    private void Open_RaceStatsWindow(object sender, RoutedEventArgs e)
     {
-        _raceStatsWindow ??= new RaceStatsWindow();
+        _raceStatsWindow = new RaceStatsWindow();
         _raceStatsWindow?.Show();
     }
 }

@@ -15,9 +15,9 @@
                 Content="{Binding Trackname, BindsDirectlyToSource=False, IsAsync=False, NotifyOnSourceUpdated=False, NotifyOnTargetUpdated=False, NotifyOnValidationError=False, ValidatesOnDataErrors=False, ValidatesOnExceptions=False, ValidatesOnNotifyDataErrors=True}" />
             <Menu DockPanel.Dock="Top" VerticalAlignment="Top" Height="20">
                 <MenuItem Header="Menu">
-                    <MenuItem Header="Open Leaderboard" Click="Open_Leaderboard" />
-                    <MenuItem Header="Batman" Click="BatmanWindow" />
-                    <MenuItem Header="RaceStats" Click="RaceStatsWindow" />
+                    <MenuItem Header="Open Saboteur" Click="Open_Saboteur" />
+                    <MenuItem Header="BasicStats" Click="Open_BasicStatsWindow" />
+                    <MenuItem Header="RaceStats" Click="Open_RaceStatsWindow" />
                     <MenuItem Header="Close" Click="ExitClick" />
                 </MenuItem>
             </Menu>

@@ -18,10 +18,22 @@ public sealed class RaceDataContext : INotifyPropertyChanged
 
     public RaceDataContext() : this(Data.CurrentRace, Data.Competition?.Participants)
     {
+        Data.CurrentRace.DriversChanged += OnDriversChanged!;
     }
 
-    private Race? CurrentRace { get; set; }
-    public List<IParticipant?>? Participants { get; set; }
+    public Race? CurrentRace { get; set; }
+
+    private List<IParticipant?>? _participants;
+    public List<IParticipant?>? Participants
+    {
+        get => _participants;
+        set
+        {
+            _participants = value;
+            
+            OnPropertyChanged();
+        }
+    }
 
     public event PropertyChangedEventHandler? PropertyChanged;
 
@@ -42,6 +54,6 @@ public sealed class RaceDataContext : INotifyPropertyChanged
     [NotifyPropertyChangedInvocator]
     private void OnPropertyChanged([CallerMemberName] string? propertyName = null)
     {
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(""));
     }
 }

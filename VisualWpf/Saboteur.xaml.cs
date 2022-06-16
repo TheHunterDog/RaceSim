@@ -3,9 +3,9 @@
 /// <summary>
 ///     Interaction logic for Windesheim.xaml
 /// </summary>
-public partial class Leaderboard
+public partial class Saboteur
 {
-    public Leaderboard()
+    public Saboteur()
     {
         InitializeComponent();
     }

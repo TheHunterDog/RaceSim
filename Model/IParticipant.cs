@@ -1,6 +1,8 @@
-﻿namespace Model;
+﻿using System.ComponentModel;
 
-public interface IParticipant
+namespace Model;
+
+public interface IParticipant:INotifyPropertyChanged
 {
     string Name { get; set; }
     int Points { get; set; }

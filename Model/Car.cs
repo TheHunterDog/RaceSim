@@ -1,4 +1,7 @@
-﻿namespace Model;
+﻿using System.ComponentModel;
+using System.Runtime.CompilerServices;
+
+namespace Model;
 
 public class Car : IEquipment
 {
@@ -23,6 +26,7 @@ public class Car : IEquipment
     private int _quality;
     private int _performance;
     private int _speed;
+    private bool _isBroken;
 
     #endregion
 
@@ -34,6 +38,8 @@ public class Car : IEquipment
         set
         {
             if (value > MinQuality) _quality = value;
+            OnPropertyChanged();
+
         }
     }
 
@@ -43,6 +49,8 @@ public class Car : IEquipment
         set
         {
             if (value > MinPerformance) _performance = value;
+            OnPropertyChanged();
+
         }
     }
 
@@ -52,10 +60,27 @@ public class Car : IEquipment
         set
         {
             if (value > MinSpeed) _speed = value;
+            OnPropertyChanged();
         }
     }
 
-    public bool IsBroken { get; set; }
+    public bool IsBroken
+    {
+        get => _isBroken;
+        set
+        {
+            _isBroken = value;
+            OnPropertyChanged();
+
+        }
+    }
 
     #endregion
+
+    public event PropertyChangedEventHandler? PropertyChanged;
+
+    protected virtual void OnPropertyChanged(string? propertyName = null)
+    {
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+    }
 }
