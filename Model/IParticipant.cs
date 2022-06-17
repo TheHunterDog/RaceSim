@@ -15,10 +15,8 @@ public interface IParticipant:INotifyPropertyChanged
         foreach (var participant in p)
         {
             Random r = new Random();
-            participant.Points = r.Next();
-            participant.Equipment.Performance = r.Next();
-            participant.Equipment.Quality = r.Next();
-            participant.Equipment.Speed = r.Next();
+            participant.Equipment.Performance = r.Next(0,5);
+            participant.Equipment.Quality = r.Next(0,6);
             participant.IsFinished = false;
 
         }
