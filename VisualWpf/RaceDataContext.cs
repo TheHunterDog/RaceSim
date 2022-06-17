@@ -30,7 +30,6 @@ public sealed class RaceDataContext : INotifyPropertyChanged
         set
         {
             _participants = value;
-            
             OnPropertyChanged();
         }
     }

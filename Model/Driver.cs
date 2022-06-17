@@ -56,6 +56,7 @@ public class Driver : IParticipant
     }
 
     public TeamColors TeamColors { get; set; }
+    public bool IsFinished { get; set; }
 
     #endregion
 

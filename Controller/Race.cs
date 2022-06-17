@@ -12,7 +12,7 @@ public class Race
     private readonly Dictionary<Section, SectionData?> _positions;
     private readonly Timer _timer;
 
-    private readonly int _winLimit = 3;
+    private readonly int _winLimit = 1;
 
 
     public Race(Track? track, List<IParticipant?>? participants)
@@ -30,7 +30,7 @@ public class Race
     }
 
     public Track? Track { get; }
-    public List<IParticipant?>? Participants { get; }
+    public List<IParticipant?>? Participants { get; set; }
 
     private Dictionary<IParticipant, int> Wins { get; }
     
@@ -47,6 +47,11 @@ public class Race
         _timer.Stop();
         End = null;
         Wins.Clear();
+        _positions.Clear();
+
+            Participants = IParticipant.Reset(Participants);
+            
+        
     }
 
     //check if all Participants have reached winLimit
@@ -55,10 +60,12 @@ public class Race
         for (var i = 0; i < Wins.Count; i++)
         {
             var w = winners.ElementAt(i);
-            if (w.Value != _winLimit) return false;
+            if (w.Value < _winLimit) return false;
         }
 
-        if (Participants != null && (winners.Count == 0 || winners.Count != Participants.Count)) return false;
+        if (Participants != null && 
+            (winners.Count != Participants.Count)
+            ) return false;
         Wins.Clear();
         return true;
     }
@@ -76,6 +83,7 @@ public class Race
                 }
 
                 Wins[p] += 1;
+                p.IsFinished = true;
                 return true;
                 //p = null;
             }
@@ -218,6 +226,7 @@ public class Race
         if (Participants.Count < i || i < 1) return;
         i -= 1;
         if (Participants[i] == null) return;
+        if(Participants[i]!.IsFinished) return;
         if (!Participants[i]!.Equipment.IsBroken)
         {
             Participants[i]!.Equipment

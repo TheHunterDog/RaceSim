@@ -20,12 +20,13 @@ public static class Data
      * Initialize de benodigdheden voor een race
      * Dit zijn Participants (Deelnemers) en Tracks (banen)
      */
-    public static void Initialize(Competition? c)
+    public static Competition Initialize(Competition? c)
     {
         if (c != null) c = new Competition();
         Competition = c;
         AddParticipants(Competition);
         AddTracks(Competition);
+        return c!;
     }
 
     /**

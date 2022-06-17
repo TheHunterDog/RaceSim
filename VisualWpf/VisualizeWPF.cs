@@ -60,9 +60,11 @@ public static class VisualizeWpf
         var (x, y) = CalculateParticipantPos(side);
         var participantBitmap = Images.LoadImage(FetchParticipantBitmapUrl(participant));
         g.DrawImage(participantBitmap, _posX + x, _posY + y);
-        if (participant != null && !participant.Equipment.IsBroken) return;
-        var broken = Images.LoadImage(Broken);
-        g.DrawImage(broken, _posX, _posY);
+        if (participant != null && participant.Equipment.IsBroken)
+        {
+            var broken = Images.LoadImage(Broken);
+            g.DrawImage(broken, _posX, _posY);
+        }
     }
 
     // Calculate the position for the drivers
